@@ -1,4 +1,4 @@
-NEEDED_SCENARIOS = ['Старт', 'Стоп', 'Следующий', 'Предыдущий', 'Тише', 'Громче', 'Включи']
+NEEDED_SCENARIOS = ['Старт', 'Стоп', 'Следующий', 'Предыдущий', 'Тише', 'Громче', 'Включи', 'Повтори']
 NEEDED_SCENARIOS_LOGICS = {
     'Старт': {
         'type': 'devices.capabilities.quasar.server_action',
@@ -47,6 +47,13 @@ NEEDED_SCENARIOS_LOGICS = {
         'state': {
             'instance': 'text_action',
             'value': 'Включи Never gonna give you up',
+        }
+    },
+    'Повтори': {
+        'type': 'devices.capabilities.quasar.server_action',
+        'state': {
+            'instance': 'text_action',
+            'value': "Повтори за мной 'Тестовое уведомление'",
         }
     },
 

@@ -56,6 +56,7 @@ class Application:
             print("5. Тише")
             print("6. Громче")
             print("7. Включи песню")
+            print("8. Скажи текст")
             number = int(input("Номер: ")) - 1
             if number == 6:
                 name = input("Название: ")

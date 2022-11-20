@@ -35,6 +35,7 @@ class YandexAPI:
                            'retpath': "https://passport.yandex.ru/am/finish?status=ok&from=Login"})
         self.get_music_id()
 
+
     def _update_csrf(self):
         raw = self.session.get("https://yandex.ru/quasar").text
         m = re.search('"csrfToken2":"(.+?)"', raw)
@@ -44,7 +45,8 @@ class YandexAPI:
         return self.session.get(self.quasar_url + "/scenarios").json()['scenarios']
 
     def get_speakers(self):
-        return self.session.get(self.quasar_url + "/devices").json()['speakers']
+        resp = self.session.get(self.quasar_url + "/devices")
+        return resp.json()['speakers']
 
     def add_scenario(self, payload):
         self._update_csrf()
