@@ -74,6 +74,22 @@ class YandexAPI:
         return self.session.post(self.quasar_url + "/scenarios/" + id + "/actions",
                                  headers={'x-csrf-token': self.csrf_token}).json()
 
+    def repeat_text(self, speaker, text, id):
+        logic = {
+            'type': 'devices.capabilities.quasar.server_action',
+            'state': {
+                'instance': 'text_action',
+                'value': 'Повтори за мной ' + text,
+            }
+        }
+
+        scenario = create_scenario('Повтори', speaker, logic)
+        self._update_csrf()
+        self.session.put(self.quasar_url + "/scenarios/" + id, json=scenario, headers={'x-csrf-token': self.csrf_token})
+        self._update_csrf()
+        return self.session.post(self.quasar_url + "/scenarios/" + id + "/actions",
+                                 headers={'x-csrf-token': self.csrf_token}).json()
+
     def get_music_id(self):
         self.music_uid = str(self.session.get(self.music_url + '/users/' + self.login).json()['result']['uid'])
 

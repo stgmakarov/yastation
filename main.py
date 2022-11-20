@@ -28,11 +28,14 @@ class Application:
         self.scenarios = self.api.get_scenarios()
 
     def init_speaker(self):
-        print("Выберите устройство: ")
-        for (i, speaker) in enumerate(self.speakers):
-            print(str(i + 1) + ". " + speaker['name'])
+        if len(self.speakers) > 1:
+            print("Выберите устройство: ")
+            for (i, speaker) in enumerate(self.speakers):
+                print(str(i + 1) + ". " + speaker['name'])
 
-        number = int(input("Номер: ")) - 1
+            number = int(input("Номер: ")) - 1
+        else:
+            number = 0
         self.speaker = self.speakers[number]['id']
 
     def init_scenarios(self):
@@ -57,11 +60,19 @@ class Application:
             print("6. Громче")
             print("7. Включи песню")
             print("8. Скажи текст")
+            print("0. Выход")
             number = int(input("Номер: ")) - 1
+            if number == -1:
+                break;
             if number == 6:
                 name = input("Название: ")
                 self.api.play_song(self.speaker, name,
                                    [scenario['id'] for scenario in self.scenarios if scenario['name'] == 'Включи'][0])
+                continue
+            if number == 7:
+                txt = input("Текст: ")
+                self.api.repeat_text(self.speaker, txt,
+                                   [scenario['id'] for scenario in self.scenarios if scenario['name'] == 'Повтори'][0])
                 continue
             scenario = NEEDED_SCENARIOS[number]
             id = ''

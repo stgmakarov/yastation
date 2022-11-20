@@ -53,7 +53,7 @@ NEEDED_SCENARIOS_LOGICS = {
         'type': 'devices.capabilities.quasar.server_action',
         'state': {
             'instance': 'text_action',
-            'value': "Повтори за мной 'Тестовое уведомление'",
+            'value': "Повтори за мной 'привет от старых щеблет'",
         }
     },
 
