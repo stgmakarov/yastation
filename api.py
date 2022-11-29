@@ -46,7 +46,16 @@ class YandexAPI:
 
     def get_speakers(self):
         resp = self.session.get(self.quasar_url + "/devices")
-        return resp.json()['speakers']
+        sp = resp.json()['speakers']
+        if sp == []:
+             # если не нашли колонки, ищем девайс
+            rooms = resp.json()['rooms']
+            for room in rooms:
+                devices = room['devices']
+                for device in devices:
+                    if device["type"] == "devices.types.smart_speaker.yandex.station":
+                        sp.append(device)
+        return sp
 
     def add_scenario(self, payload):
         self._update_csrf()

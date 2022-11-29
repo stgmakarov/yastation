@@ -37,6 +37,7 @@ class Application:
         else:
             number = 0
         self.speaker = self.speakers[number]['id']
+        #self.speaker = "096ee641-323e-4bee-a0d8-a2a3f77a7634"
 
     def init_scenarios(self):
         existing_scenarios = [scenario['name'] for scenario in self.scenarios]
